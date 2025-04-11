@@ -1,0 +1,61 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<body class="full_bg">
+    <div style="margin-top: -50px;">
+        <div class="container">
+            <div class="row d-flex justify-content-center align-items-center" style="height: 100vh;">
+                <div class="col-md-6" style="margin-top:px;margin-left: -60px; background-color: rgba(255, 255, 255, 0.8); border-radius: 15px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
+                    <div class="col-md-12">
+                        <center>
+                            <label for="data">
+                                <h3 style="color: #333;">Dataset</h3>
+                            </label>
+                        </center>
+                        <div style="color: rgb(31, 12, 12); margin-top: 10px; height: 300px; overflow: auto; border: 1px solid #ccc; border-radius: 10px;">
+                            {% if df %}
+                                {{ df | safe }}
+                            {% else %}
+                                <center>
+                                    <h5 style="color: #777;">No dataset available.</h5>
+                                </center>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 order1" style="margin-top: 30px;margin-left:50px">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="contac_form" class="main_form2" action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data"  onsubmit="return validateFile()">
+                                <div class="form-group" style="margin-top: 0;">
+                                    <input class="form-control-file" style="border-radius: 10px; margin-bottom: 10px;" id='fileInput' type="file" name="file" accept=".csv" title="Upload the valid file" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-left">
+                                        <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 5px; background-color: #007bff; border: none; padding: 10px;">Upload</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function validateFile() {
+        const fileInput = document.getElementById('fileInput');
+        const filePath = fileInput.value;
+        const allowedExtensions = /(\.csv)$/i;
+    
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Please enter a valid CSV file.');
+            fileInput.value = ''; // Clear the input
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+    </script>
+{% endblock %}

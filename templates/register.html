@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage text_align_center">
+                    <h2>Register</h2>
+                </div>
+            </div>
+            <div class=" col-md-10 offset-md-1">
+                <form id="request" class="main_form" action="{{url_for('register')}}" method="post">
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <input class="contactus" placeholder="Full Name" type="text" name="name" pattern="[A-Za-z\s]+" title="Please enter a valid name (letters and spaces only)" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="contactus" placeholder="Email" type="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="contactus" placeholder="Phone number" type="tel" name="phone"  pattern="(\+91[\-\s]?)?[6-9]{1}[0-9]{9}" title="Please enter a valid number (number  only)" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="contactus" placeholder="Password" type="password" name="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password must be at least 8 characters long and contain both letters and numbers"  required>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="contactus" placeholder="Confirm password" type="password" name="c_password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password must be at least 8 characters long and contain both letters and numbers" required>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="send_btn" type="submit">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

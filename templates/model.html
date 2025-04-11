@@ -1,0 +1,49 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<body >
+    <div style="padding-bottom: 200px;">
+        <div class="container">
+            <center>
+                <div class="row">
+                    <div class="col-md-12" style="margin-top: 150px;">
+                        <div class="titlepage1">
+
+                            <h1>Model Performance</h1>
+                            <form action="{{url_for('model')}}" method="post" enctype="multipart/form-data">
+
+                                <div class="caption header-text">
+                                    {% if msg %}
+                                    <h2 style="color: rgb(13, 255, 53); font-weight: bolder; margin-top: px;">{{ msg }}
+                                    </h2>
+                                    {% endif %}
+                                </div>
+                                <div style="margin-top: 30px;">
+                                    <select class="form-select" name="algo"
+                                        style="width: 430px; background-image: linear-gradient(to right, #ece7e6 67%, #0408ff 33%); color: black; height: 50px; border-radius: 12px; font-weight: bold; text-align: center;margin-top: -200px;">
+                                        <option value="0">Select an Algorithm</option>
+                                        <option value="1">Decision Tree</option>
+                                        <option value="2">Random Forest Classifier</option>
+                                        <option value="3">XGBC Classifier</option>
+                                        <option value="4">Gredint boost Classifier</option>
+                                    
+                                    </select>
+                                </div>
+                                <div style="margin-top: 30px;">
+                                    <button type="submit"
+                                        style="width: 150px; border-radius: 20px; background-color: #ffffff; color: black; height: 50px; font-weight: bold;">
+                                        Submit
+                                    </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </center>
+        </div>
+    </div>
+</body>
+{% endblock %}

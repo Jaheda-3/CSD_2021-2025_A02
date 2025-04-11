@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block content %}
+<div id="about" class="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="about_border">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="titlepage text_align_left">
+                                <h2>About Us</h2>
+                            </div>
+                            <div class="about_text">
+                                <p>With the rapid adoption of Unified Payments Interface (UPI) for digital transactions, 
+                                    the risk of fraudulent activities has also increased significantly. To address this challenge, 
+                                    we propose a novel approach to detect UPI fraud by analyzing transaction details such as the 
+                                    bank book name, transaction ID, and transaction amount. </p>
+                                <a class="read_more" href="{{url_for('about')}}">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="about_img">
+                                <figure><img style="border-radius: 30px;" src="/static/images/img.jpg" alt="#" /></figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

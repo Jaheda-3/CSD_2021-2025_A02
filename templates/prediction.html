@@ -1,0 +1,219 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div style="padding-top: 10px; padding-bottom: 50px;">
+    <div class="booking1 p-5">
+
+        <h2 style="text-align: center; margin-bottom: 10px; color: #cfdeec; margin-top: 40px;">
+            Prediction</h2>
+
+            {% if prediction %}
+            {% if prediction == 'No Fraud Transaction' %}
+            <h2 style="color: rgb(247, 247, 247); text-align: center; margin-bottom: 40px;">Prediction: {{ prediction }}</h2>
+            {% else %}
+            <h2 style="color: red; text-align: center; margin-bottom: 40px;">Prediction: {{ prediction }}</h2>
+            {% endif %}
+          {% endif %}
+        <form action="{{ url_for('prediction') }}" method="post" role="form">
+            <!-- Row for Select and Amount fields -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <select id="type" name="type" class="form-select"
+                            style="border-radius: 30px; color: rgb(0, 0, 0); height: 50px; width: 500px;" required>
+                            <option value="" style="width: 650px;">Choose type</option>
+                            <option value="0">CASH_IN</option>
+                            <option value="1">CASH_OUT</option>
+                            <option value="2">DEBIT</option>
+                            <option value="3">PAYMENT</option>
+                            <option value="4">TRANSFER</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <input type="number" step="any" name="amount" class="form-control"
+                            style="border-radius: 30px; color: rgb(0, 0, 0); height: 50px;" placeholder="Enter Amount"
+                            required>
+                        <!-- <label for="amount">Amount</label> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row for Old and New Balance Origin fields -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <input type="number" step="any" name="oldbalanceOrg" class="form-control"
+                            style="border-radius: 30px; color: rgb(0, 0, 0); height: 50px;"
+                            placeholder="Enter Old Balance Origin" required>
+                        <!-- <label for="oldbalanceOrg">Old Balance Origin</label> -->
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <input type="number" step="any" name="newbalanceOrig" class="form-control"
+                            style="border-radius: 30px; color: rgb(0, 0, 0); height: 50px;"
+                            placeholder="Enter New Balance Origin" required>
+                        <!-- <label for="newbalanceOrig">New Balance Origin</label> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row for Old and New Balance Destination fields -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <input type="number" step="any" name="oldbalanceDest" class="form-control"
+                            style="border-radius: 30px; color: rgb(0, 0, 0); height: 50px;"
+                            placeholder="Enter Old Balance Destination" required>
+                        <!-- <label for="oldbalanceDest">Old Balance Destination</label> -->
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <input type="number" step="any" name="newbalanceDest" class="form-control"
+                            style="border-radius: 30px; color: rgb(0, 0, 0); height: 50px;"
+                            placeholder="Enter New Balance Destination" required>
+                        <!-- <label for="newbalanceDest">New Balance Destination</label> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-center mt-4 mb-3">
+                <button type="submit" class="btn custom-btn"
+                    style="width: 600px; border-radius: 20px; margin-bottom: 15px; height: 50px; background-color: rgb(138, 140, 143); color: black;">
+                    Submit
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
+<!-- <form action="{{ url_for('prediction') }}" method="post"
+            style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="amount" style="font-weight: bold; color: #ffffff;">Amount (INR):</label>
+                <input type="number" id="amount" name="amount" step="any"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="hours" style="font-weight: bold; color: #ffffff;">Hours:</label>
+                <input type="number" id="hours" name="hours"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    min="0" max="" required>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="minutes" style="font-weight: bold; color: #ffffff;">Minutes:</label>
+                <input type="number" id="minutes" name="minutes"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    min="0" max="59" required>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="date" style="font-weight: bold; color: #ffffff;">Day:</label>
+                <input type="number" id="date" name="date"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="sender_okhdfcbank" style="font-weight: bold; color: #ffffff;">Sender (HDFC Bank):</label>
+                <select id="sender_okhdfcbank" name="sender_okhdfcbank"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+                    <option value="" disabled selected>Choose option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="sender_okicici" style="font-weight: bold; color: #ffffff;">Sender (ICICI):</label>
+                <select id="sender_okicici" name="sender_okicici"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+                    <option value="" disabled selected>Choose option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="sender_oksbi" style="font-weight: bold; color: #ffffff;">Sender (SBI):</label>
+                <select id="sender_oksbi" name="sender_oksbi"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+                    <option value="" disabled selected>Choose option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="sender_okybl" style="font-weight: bold; color: #ffffff;">Sender (YBL):</label>
+                <select id="sender_okybl" name="sender_okybl"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+                    <option value="" disabled selected>Choose option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="receiver_okhdfcbank" style="font-weight: bold; color: #ffffff;">Receiver (HDFC Bank):</label>
+                <select id="receiver_okhdfcbank" name="receiver_okhdfcbank"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+                    <option value="" disabled selected>Choose option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="receiver_okicici" style="font-weight: bold; color: #ffffff;">Receiver (ICICI):</label>
+                <select id="receiver_okicici" name="receiver_okicici"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+                    <option value="" disabled selected>Choose option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="receiver_oksbi" style="font-weight: bold; color: #ffffff;">Receiver (SBI):</label>
+                <select id="receiver_oksbi" name="receiver_oksbi"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+                    <option value="" disabled selected>Choose option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="receiver_okybl" style="font-weight: bold; color: #ffffff;">Receiver (YBL):</label>
+                <select id="receiver_okybl" name="receiver_okybl"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+                    <option value="" disabled selected>Choose option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div style="width: 100%; text-align: center; margin-top: 0px;">
+                <button type="submit"
+                    style="width: 100%; padding: 8px; font-size: 16px; color: rgb(0, 0, 0); font-weight: bold; background-color: #ffffffdc; border: none; border-radius: 10px; cursor: pointer;">
+                    Submit</button>
+            </div>
+
+        </form> -->
